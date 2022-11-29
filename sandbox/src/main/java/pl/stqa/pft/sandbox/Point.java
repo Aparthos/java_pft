@@ -2,6 +2,7 @@ package pl.stqa.pft.sandbox;
 
 public class Point {
 
+
   private double x;
   private double y;
 
@@ -25,6 +26,8 @@ public class Point {
   }
 
   public static void main(String[] args) {
+
+    System.out.println("Zadanie domowe, Kamil Malinowski");
 
     Point px = new Point(3, 3);
 
