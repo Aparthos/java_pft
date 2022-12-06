@@ -1,6 +1,7 @@
 apply plugin: 'java'
 
 
+
 test {
     useTestNG()
     }
@@ -15,5 +16,8 @@ repositories {
 dependencies {
 
     implementation 'org.testng:testng:7.6.1'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.7.0'
+
+
 
 }
