@@ -1,4 +1,4 @@
-package pl.stqa.pft.adressbook;
+package pl.stqa.pft.adressbook.tests;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
@@ -11,9 +11,9 @@ public class GroupDeletionTests extends TestBase{
   @Test
   public void testGroupDeletion() throws Exception {
 
-    gotoGroupPage();
-    deleteSelectedGroup();
-   returnToGroupPage();
+    app.getNavigationHelper().gotoGroupPage();
+    app.getGroupHelper().deleteSelectedGroup();
+   app.getGroupHelper().returnToGroupPage();
   }
 
 
