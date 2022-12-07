@@ -1,4 +1,4 @@
-package pl.stqa.pft.adressbook.appmanager;
+package pl.stqa.pft.adressbook.appmanagerGroup;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -31,5 +31,15 @@ public class GroupHelper extends HelperBase {
 
   public void deleteSelectedGroup() {
     click(By.name("delete"));
+  }
+
+  public void initGroupModification() {
+    click(By.name("edit"));
+
+  }
+
+  public void submitGroupMadification() {
+    click(By.name("update"));
+
   }
 }

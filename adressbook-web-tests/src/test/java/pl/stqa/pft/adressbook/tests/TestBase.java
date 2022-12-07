@@ -2,7 +2,7 @@ package pl.stqa.pft.adressbook.tests;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pl.stqa.pft.adressbook.appmanager.ApplicationManager;
+import pl.stqa.pft.adressbook.appmanagerGroup.ApplicationManager;
 
 public class TestBase {
 

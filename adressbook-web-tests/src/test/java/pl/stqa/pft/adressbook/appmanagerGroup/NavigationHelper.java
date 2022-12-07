@@ -1,7 +1,6 @@
-package pl.stqa.pft.adressbook.appmanager;
+package pl.stqa.pft.adressbook.appmanagerGroup;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class NavigationHelper extends HelperBase{
