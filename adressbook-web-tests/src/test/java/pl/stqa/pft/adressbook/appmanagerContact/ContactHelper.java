@@ -17,6 +17,14 @@ public class ContactHelper extends HelperBaseC {
     click(By.linkText("add new"));
   }
 
+
+
+  public void selectID() {
+    click(By.linkText("id=26"));
+  }
+
+
+
   public void submitContactForm() {
     click(By.xpath("//div[@id='content']/form/input[21]"));
   }
@@ -34,8 +42,18 @@ public class ContactHelper extends HelperBaseC {
   }
 
 
-    private void deleteSelectedContact() {
+    public void deleteSelectedContact() {
     click(By.xpath("//input[@value='Delete'"));
   }
+
+  public void initContactModification() {
+    click(By.xpath("img[@alt='Edit'"));
+  }
+
+
+  public void submitContactModification() {
+    click(By.xpath("//div[@id='content']/form/input[22]"));
+  }
+
 
 }
