@@ -38,8 +38,12 @@ public class GroupHelper extends HelperBase {
 
   }
 
-  public void submitGroupMadification() {
+  public void submitGroupModification() {
     click(By.name("update"));
 
+  }
+
+  public void selectedGroup() {
+    click(By.name("selected"));
   }
 }
