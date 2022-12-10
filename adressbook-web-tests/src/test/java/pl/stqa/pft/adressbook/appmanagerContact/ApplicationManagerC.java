@@ -29,11 +29,11 @@ public class ApplicationManagerC {
   public void init() {
 
     String browser = Browser.EDGE.browserName();
-    if (browser == Browser.FIREFOX.browserName()) {
+    if (browser.equals(Browser.FIREFOX.browserName())) {
       wd = new FirefoxDriver();
-    } else if (browser == Browser.CHROME.browserName()) {
+    } else if (browser.equals(Browser.CHROME.browserName())) {
       wd = new ChromeDriver();
-    } else if (browser == Browser.EDGE.browserName()) {
+    } else if (browser.equals(Browser.EDGE.browserName())) {
       wd = new EdgeDriver();
     }
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
