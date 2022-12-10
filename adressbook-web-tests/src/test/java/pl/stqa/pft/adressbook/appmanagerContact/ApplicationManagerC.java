@@ -25,8 +25,7 @@ public class ApplicationManagerC {
     sessionHelperC = new SessionHelperC(wd);
     wd.get("http://localhost/addressbook/edit.php#");
     sessionHelperC.login("admin", "secret");
-    wd.findElement(By.xpath("//input[@value='Login']")).click();
-  }
+      }
 
 
 
