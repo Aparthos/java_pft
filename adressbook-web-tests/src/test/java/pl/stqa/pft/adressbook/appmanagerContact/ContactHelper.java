@@ -21,7 +21,7 @@ public class ContactHelper extends HelperBaseC {
 
 
   public void selectID() {
-    click(By.linkText("id=26"));
+    click(By.name("selected[]"));
   }
 
 
@@ -42,18 +42,18 @@ public class ContactHelper extends HelperBaseC {
 
 
     if (creation)  {
-      new Select(wd.findElement(By.name("new group"))).selectByVisibleText(contactData.getGroup());
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
 
 
     } else {
-      Assert.assertFalse(isElementPresent(By.name("new group")));
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
 
 
 
   public void deleteSelectedContact () {
-      click(By.xpath("//input[@value='Delete'"));
+      click(By.name("Delete"));
     }
 
     public void initContactModification () {

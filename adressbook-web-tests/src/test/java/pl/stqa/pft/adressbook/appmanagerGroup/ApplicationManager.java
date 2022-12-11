@@ -35,7 +35,7 @@ public class ApplicationManager {
     } else if (browser.equals(Browser.EDGE.browserName())) {
       wd = new EdgeDriver();
     }
-    wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     groupHelper = new GroupHelper((FirefoxDriver) wd);
     navigationHelper = new NavigationHelper (wd);
     sessionHelper = new SessionHelper(wd);
