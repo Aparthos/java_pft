@@ -13,6 +13,12 @@ public class NavigationHelperC extends HelperBaseC {
   }
 
   public void chooseHome() {
+
+  if (isElementPresent(By.id("maintable")))  {
+
+    return;
+  }
+
     click(By.linkText("home"));
   }
 }
