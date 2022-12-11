@@ -18,20 +18,12 @@ public class HelperBase {
 
   protected void type(By locator, String text) {
     click(locator);
-    if (text != null) {
 
-      String existingText = wd.findElement(locator).getAttribute("value");
+    wd.findElement(locator).clear();
+    wd.findElement(locator).sendKeys(text);
 
-      if (! text.equals(existingText)) {
-        wd.findElement(locator).clear();
-        wd.findElement(locator).sendKeys(text);
-
-      }
-
-
-
-    }
   }
+
 
   private boolean isAlertPresent() {
     try {
@@ -42,6 +34,6 @@ public class HelperBase {
     }
   }
 
-
-
 }
+
+

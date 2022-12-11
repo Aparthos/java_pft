@@ -1,5 +1,7 @@
 package pl.stqa.pft.adressbook.model;
 
+import java.awt.*;
+
 public class ContactData {
 
   private final String name;
@@ -8,14 +10,17 @@ public class ContactData {
   private final String title;
   private final String email;
 
+  private String group;
 
-  public ContactData (String name, String surname, String nickname, String title, String email) {
+
+  public ContactData (String name, String surname, String nickname, String title, String email, String group) {
 
     this.name = name;
     this.surname = surname;
     this.nickname = nickname;
     this.title = title;
     this.email = email;
+    this.group = group;
 
 
   }
@@ -39,5 +44,9 @@ public class ContactData {
 
   public String getEmail() {
     return email;
+  }
+
+  public String getGroup() {
+    return group;
   }
 }

@@ -28,7 +28,7 @@ public class ApplicationManagerC {
 
   public void init() {
 
-    String browser = Browser.EDGE.browserName();
+    String browser = Browser.FIREFOX.browserName();
     if (browser.equals(Browser.FIREFOX.browserName())) {
       wd = new FirefoxDriver();
     } else if (browser.equals(Browser.CHROME.browserName())) {
@@ -36,7 +36,7 @@ public class ApplicationManagerC {
     } else if (browser.equals(Browser.EDGE.browserName())) {
       wd = new EdgeDriver();
     }
-    wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
     contactHelper = new ContactHelper(wd);
     navigationHelperC = new NavigationHelperC(wd);
     sessionHelperC = new SessionHelperC(wd);

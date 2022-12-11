@@ -11,7 +11,7 @@ public class ContactModificationTests extends TestBaseC{
     app.getNavigationHelperC().chooseHome();
     app.getContactHelper().selectID();
     app.getContactHelper().initContactModification();
-    app.getContactHelper().fillContactForm(new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl"));
+    app.getContactHelper().fillContactForm(new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", null), false);
     app.getContactHelper().submitContactModification();
     app.getNavigationHelperC().chooseHome();
 
