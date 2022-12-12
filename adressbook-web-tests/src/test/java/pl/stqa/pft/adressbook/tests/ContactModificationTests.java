@@ -9,9 +9,17 @@ public class ContactModificationTests extends TestBaseC{
   public void testContactModification() {
 
     app.getNavigationHelperC().chooseHome();
+
+    if (! app.getContactHelper().isThereAContact()) {
+      app.getContactHelper().createContact(new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", "test1"), true);
+
+
+    }
+
+
     app.getContactHelper().selectID();
     app.getContactHelper().initContactModification();
-    app.getContactHelper().fillContactForm(new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", null), false);
+    app.getContactHelper().createContact(new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", "test1"), true);
     app.getContactHelper().submitContactModification();
     app.getNavigationHelperC().chooseHome();
 

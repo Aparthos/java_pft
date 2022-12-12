@@ -11,9 +11,7 @@ public class ContactCreationTests extends TestBaseC{
 
 
     app.getNavigationHelperC().chooseHome();
-    app.getContactHelper().chooseAddNew();
-    app.getContactHelper().fillContactForm(new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", "test1"), true);
-    app.getContactHelper().submitContactForm();
+    app.getContactHelper().createContact(new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", "test1"), true);
     app.getNavigationHelperC().chooseHome();
 
   }

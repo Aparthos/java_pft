@@ -66,7 +66,22 @@ public class ContactHelper extends HelperBaseC {
     }
 
 
+  public void createContact(ContactData contact, boolean b) {
+
+    chooseAddNew();
+    fillContactForm(contact, b);
+    submitContactForm();
+
+
+
   }
+
+  public boolean isThereAContact() {
+
+      return isElementPresent (By.name("selected[]"));
+
+  }
+}
 
 
 
