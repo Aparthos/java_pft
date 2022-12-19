@@ -22,7 +22,7 @@ public class GroupDeletionTests extends TestBase{
     }
 
 
-    app.getGroupHelper().selectedGroup();
+    app.getGroupHelper().selectedGroup(before - 1);
     app.getGroupHelper().deleteSelectedGroup();
     app.getGroupHelper().returnToGroupPage();
     int after = app.getGroupHelper().getGroupCount();
