@@ -44,7 +44,7 @@ public class GroupHelper extends HelperBase {
   }
 
   public void selectedGroup() {
-    click(By.name("selected"));
+    click(By.name("selected[]"));
   }
 
   public void createGroup(GroupData group) {
@@ -61,4 +61,11 @@ public class GroupHelper extends HelperBase {
     return isElementPresent(By.name("selected"));
 
   }
+
+  public int getGroupCount() {
+
+    return wd.findElements(By.name("selected[]")).size();
+
+  }
+
 }
