@@ -1,5 +1,6 @@
 package pl.stqa.pft.adressbook.tests;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.testng.Assert;
@@ -15,29 +16,25 @@ public class ContactDeletionTests extends TestBaseC {
   public void testContactDeletion() {
 
 
-
     app.getNavigationHelperC().chooseHome();
-    int before = app.getContactHelper().getContactCount();
-    if (! app.getContactHelper().isThereAContact()) {
-          app.getContactHelper().createContact(new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", "test1"), true);
+    if (!app.getContactHelper().isThereAContact()) {
+      app.getContactHelper().createContact(new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", "test1"), true);
 
 
     }
-    app.getContactHelper().selectID();
+    List<ContactData> before = app.getContactHelper().getContactList();
+    app.getContactHelper().selectID(before.size() - 1);
     app.getContactHelper().deleteSelectedContact();
     app.getNavigationHelperC().chooseHome();
-    int after = app.getContactHelper().getContactCount();
-    Assert.assertEquals(after, before - 1);
+    List<ContactData> after = app.getContactHelper().getContactList();
+    Assert.assertEquals(after.size(), before.size() - 1);
+
+    before.remove(before.size() - 1);
+
+      Assert.assertEquals(before, after);
+
+
+
 
   }
-
-
-
-
-
-
-
-
-
 }
-
