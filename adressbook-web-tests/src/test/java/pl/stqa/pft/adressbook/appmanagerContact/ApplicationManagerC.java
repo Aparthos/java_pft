@@ -40,7 +40,7 @@ public class ApplicationManagerC {
     contactHelper = new ContactHelper(wd);
     navigationHelperC = new NavigationHelperC(wd);
     sessionHelperC = new SessionHelperC(wd);
-    wd.get("http://localhost/addressbook/edit.php#");
+    wd.get("http://localhost/addressbook");
     sessionHelperC.login("admin", "secret");
       }
 

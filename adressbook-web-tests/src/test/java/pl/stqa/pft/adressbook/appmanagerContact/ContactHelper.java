@@ -81,6 +81,12 @@ public class ContactHelper extends HelperBaseC {
       return isElementPresent (By.name("selected[]"));
 
   }
+
+  public int getContactCount() {
+
+    return wd.findElements(By.name("selected[]")).size();
+
+  }
 }
 
 
