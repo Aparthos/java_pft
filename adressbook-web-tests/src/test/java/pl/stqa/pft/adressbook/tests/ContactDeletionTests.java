@@ -12,7 +12,7 @@ import pl.stqa.pft.adressbook.model.ContactData;
 
 public class ContactDeletionTests extends TestBaseC {
 
-  @Test
+  @Test (enabled = false)
   public void testContactDeletion() {
 
 

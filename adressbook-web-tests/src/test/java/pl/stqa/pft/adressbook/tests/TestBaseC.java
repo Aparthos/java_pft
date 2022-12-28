@@ -1,21 +1,21 @@
 package pl.stqa.pft.adressbook.tests;
 
 import org.openqa.selenium.remote.Browser;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import pl.stqa.pft.adressbook.appmanagerContact.ApplicationManagerC;
 
 public class TestBaseC{
 
-  protected final ApplicationManagerC app = new ApplicationManagerC(Browser.CHROME.browserName());
+  protected static final ApplicationManagerC app = new ApplicationManagerC(Browser.FIREFOX.browserName());
 
-  @BeforeMethod(alwaysRun = true)
+  @BeforeSuite(alwaysRun = true)
   public void setUp() throws Exception {
     app.init();
 
   }
 
-  @AfterMethod(alwaysRun = true)
+  @AfterSuite(alwaysRun = true)
   public void tearDown() throws Exception {
     app.stop();
 

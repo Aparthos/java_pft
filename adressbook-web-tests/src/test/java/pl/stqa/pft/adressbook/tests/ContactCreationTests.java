@@ -11,7 +11,7 @@ import java.util.List;
 public class ContactCreationTests extends TestBaseC{
 
 
-  @Test
+  @Test (enabled = false)
   public void testContactCreation() throws Exception {
 
 

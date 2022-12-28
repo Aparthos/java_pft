@@ -8,7 +8,7 @@ import java.util.*;
 
 public class ContactModificationTests extends TestBaseC{
 
-  @Test
+  @Test (enabled = false)
   public void testContactModification() {
 
 
