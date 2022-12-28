@@ -1,16 +1,15 @@
 package pl.stqa.pft.adressbook.model;
 
-import java.awt.*;
 import java.util.Objects;
 
 public class ContactData {
 
-  private int id;
-  private final String name;
-  private final String surname;
-  private final String nickname;
-  private final String title;
-  private final String email;
+  private int id = Integer.MAX_VALUE;
+  private String name;
+  private String surname;
+  private String nickname;
+  private String title;
+  private String email;
 
   private String group;
 
@@ -20,38 +19,48 @@ public class ContactData {
   }
 
 
-
-
-  public ContactData (String name, String surname, String nickname, String title, String email, String group) {
-
-    this.id = Integer.MAX_VALUE;
-    this.name = name;
-    this.surname = surname;
-    this.nickname = nickname;
-    this.title = title;
-    this.email = email;
-    this.group = group;
-
-
-  }
-
-  public ContactData (int id, String name, String surname, String nickname, String title, String email, String group) {
-
-    this.id = id;
-    this.name = name;
-    this.surname = surname;
-    this.nickname = nickname;
-    this.title = title;
-    this.email = email;
-    this.group = group;
-
-
-  }
-
   public int getId() {
 
     return id;
   }
+  public ContactData withId(int id) {
+
+    this.id = id;
+    return this;
+
+  }
+
+
+
+  public ContactData withName(String name) {
+    this.name = name;
+    return this;
+  }
+
+  public ContactData withSurname(String surname) {
+    this.surname = surname;
+    return this;
+
+  }
+
+  public ContactData withNickname(String nickname) {
+    this.nickname = nickname;
+    return this;
+
+  }
+
+  public ContactData withTitle(String title) {
+    this.title = title;
+    return this;
+
+  }
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+
+  }
+
   public String getName() {
     return name;
 
@@ -77,9 +86,7 @@ public class ContactData {
     return group;
   }
 
-  public void setId(int id) {
-    this.id = id;
-  }
+
 
   @Override
   public String toString() {

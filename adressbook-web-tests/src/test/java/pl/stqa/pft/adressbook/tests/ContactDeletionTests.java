@@ -14,7 +14,7 @@ public class ContactDeletionTests extends TestBaseC {
     app.goToC().Home();
 
     if (!app.contact().isThereAContact()) {
-      app.contact().create(new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", "test1"), true);
+      app.contact().create(new ContactData().withName("Kamil").withSurname("Malinowski"), true);
 
 
     }

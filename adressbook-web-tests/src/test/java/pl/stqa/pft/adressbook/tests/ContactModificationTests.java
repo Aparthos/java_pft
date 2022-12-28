@@ -15,7 +15,7 @@ public class ContactModificationTests extends TestBaseC{
     app.goToC().Home();
 
     if (app.contact().list().size() == 0) {
-      app.contact().create(new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", "test1"), true);
+      app.contact().create(new ContactData().withName("Kamil"), true);
 
 
     }
@@ -29,7 +29,7 @@ public class ContactModificationTests extends TestBaseC{
 
     List<ContactData> before = app.contact().list();
     int index = before.size() - 1;
-    ContactData contact = new ContactData(before.get(index).getId(),"Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", "test1");
+    ContactData contact = new ContactData().withId(before.get(index).getId()).withName("Kamil").withSurname("Malinowski").withNickname("Aparthos").withTitle("Mr.").withEmail("kamilmal7wp.pl@wp.pl");
     app.contact().modify(index, contact);
     app.goToC().Home();
     List<ContactData> after = app.contact().list();

@@ -16,8 +16,8 @@ public class ContactCreationTests extends TestBaseC{
 
     app.goToC().Home();
     List<ContactData> before = app.contact().list();
-    ContactData contact = new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", "test1");
-    app.contact().create(new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", "test1"), true);
+    ContactData contact = new ContactData().withName("Kamil");
+    app.contact().create(contact, true);
     app.goToC().Home();
     List<ContactData> after = app.contact().list();
     Assert.assertEquals(after.size(), before.size() + 1);
@@ -27,8 +27,12 @@ public class ContactCreationTests extends TestBaseC{
     before.sort(byId);
     after.sort(byId);
     Assert.assertEquals(before, after);
+
+
   }
-  }
+
+
+}
 
 
 

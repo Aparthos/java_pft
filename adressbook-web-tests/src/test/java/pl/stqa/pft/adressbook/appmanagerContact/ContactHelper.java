@@ -79,13 +79,12 @@ public class ContactHelper extends HelperBaseC {
     submitContactForm();
 
 
-
   }
 
   public void modify(int index, ContactData contact) {
     selectID(index);
     initContactModification();
-    create(new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", "test1"), true);
+    create(contact, true);
     submitContactModification();
   }
 
@@ -117,7 +116,7 @@ public class ContactHelper extends HelperBaseC {
       String name = element.getText ();
       String surname = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("intput")).getAttribute("value"));
-      ContactData contact = new ContactData(id,name, surname, null, null, null, null);
+      ContactData contact = new ContactData().withId(id).withName(name);
       contacts.add(contact);
     }
     return contacts;
