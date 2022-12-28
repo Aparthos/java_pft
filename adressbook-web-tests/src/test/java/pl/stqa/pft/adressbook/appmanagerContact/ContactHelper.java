@@ -72,7 +72,7 @@ public class ContactHelper extends HelperBaseC {
     }
 
 
-  public void createContact(ContactData contact, boolean b) {
+  public void create(ContactData contact, boolean b) {
 
     chooseAddNew();
     fillContactForm(contact, b);
@@ -81,6 +81,20 @@ public class ContactHelper extends HelperBaseC {
 
 
   }
+
+  public void modify(int index, ContactData contact) {
+    selectID(index);
+    initContactModification();
+    create(new ContactData("Kamil", "Malinowski", "Aparthos", "Mr.", "kamilmal7wp.pl@wp.pl", "test1"), true);
+    submitContactModification();
+  }
+
+  public void delete(int index) {
+    selectID(index);
+    deleteSelectedContact();
+
+  }
+
 
   public boolean isThereAContact() {
 
@@ -94,7 +108,7 @@ public class ContactHelper extends HelperBaseC {
 
   }
 
-  public List<ContactData> getContactList() {
+  public List<ContactData> list() {
 
     List<ContactData> contacts = new ArrayList<ContactData>();
 
@@ -108,6 +122,11 @@ public class ContactHelper extends HelperBaseC {
     }
     return contacts;
   }
+
+
+
+
+
 }
 
 

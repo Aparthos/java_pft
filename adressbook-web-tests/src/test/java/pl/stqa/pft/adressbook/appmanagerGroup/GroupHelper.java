@@ -52,7 +52,7 @@ public class GroupHelper extends HelperBase {
 
   }
 
-  public void createGroup(GroupData group) {
+  public void create(GroupData group) {
 
     initGroupCreation();
     fillGroupForm(group);
@@ -61,34 +61,50 @@ public class GroupHelper extends HelperBase {
 
   }
 
-  public boolean isThereAGroup() {
-
-    return isElementPresent(By.name("selected"));
-
-  }
-
-  public int getGroupCount() {
-
-    return wd.findElements(By.name("selected[]")).size();
+  public void modify(int index, GroupData group) {
+    selectedGroup(index);
+    initGroupModification();
+    fillGroupForm(group);
+    submitGroupModification();
+    returnToGroupPage();
 
   }
 
-  public List<GroupData> getGroupList() {
-
-  List<GroupData> groups = new ArrayList<GroupData>();
-  List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-
-  for (WebElement element : elements) {
-
-    String name = element.getText();
-    int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-    GroupData group = new GroupData(id, name, null, null);
-    groups.add(group);
-
+  public void delete(List<GroupData> before) {
+    selectedGroup(before.size() - 1);
+    deleteSelectedGroup();
+    returnToGroupPage();
   }
 
 
-  return groups;
 
-  }
+  public boolean isThereAGroup () {
+      return isElementPresent(By.name("selected"));
+    }
+
+    public int getGroupCount () {
+      return wd.findElements(By.name("selected[]")).size();
+    }
+
+    public List<GroupData> list() {
+
+      List<GroupData> groups = new ArrayList<GroupData>();
+      List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
+
+      for (WebElement element : elements) {
+
+        String name = element.getText();
+        int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+        GroupData group = new GroupData(id, name, null, null);
+        groups.add(group);
+
+      }
+
+
+      return groups;
+
+    }
+
+
 }
+

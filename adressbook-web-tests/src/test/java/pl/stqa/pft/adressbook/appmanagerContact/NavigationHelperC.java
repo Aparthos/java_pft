@@ -12,7 +12,7 @@ public class NavigationHelperC extends HelperBaseC {
     super (wd);
   }
 
-  public void chooseHome() {
+  public void Home() {
 
   if (isElementPresent(By.id("maintable")))  {
 

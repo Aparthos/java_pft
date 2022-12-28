@@ -1,7 +1,6 @@
 package pl.stqa.pft.adressbook.appmanagerContact;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -61,11 +60,11 @@ public class ApplicationManagerC {
 
 
 
-  public ContactHelper getContactHelper() {
+  public ContactHelper contact() {
     return contactHelper;
   }
 
-  public NavigationHelperC getNavigationHelperC() {
+  public NavigationHelperC goToC() {
     return navigationHelperC;
   }
 }
