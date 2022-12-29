@@ -18,6 +18,9 @@ public class ContactData {
 
   private String allPhones;
 
+  private String address;
+
+
   public ContactData withAllPhones(String allPhones) {
     this.allPhones = allPhones;
     return this;
@@ -159,4 +162,15 @@ public class ContactData {
   }
 
 
+  public String getAddress() {
+    return address;
+  }
+
+  public void setAddress(String address) {
+    this.address = address;
+  }
+
+  public ContactData withAddress(String address) {
+    return null;
+  }
 }
