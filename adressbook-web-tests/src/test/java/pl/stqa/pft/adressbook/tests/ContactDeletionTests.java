@@ -1,10 +1,12 @@
 package pl.stqa.pft.adressbook.tests;
 
-import java.util.List;
+
+import java.util.Set;
 
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pl.stqa.pft.adressbook.model.ContactData;
+
 
 public class ContactDeletionTests extends TestBaseC {
 
@@ -27,14 +29,14 @@ public class ContactDeletionTests extends TestBaseC {
 
 
 
-    List<ContactData> before = app.contact().list();
-    int index = before.size() - 1;
-    app.contact().delete(index);
+    Set<ContactData> before = app.contact().all();
+    ContactData deletedContact = before.iterator().next();
+    app.contact().delete(deletedContact);
     app.goToC().Home();
-    List<ContactData> after = app.contact().list();
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size() - 1);
 
-    before.remove(index);
+    before.remove(deletedContact);
 
       Assert.assertEquals(before, after);
 

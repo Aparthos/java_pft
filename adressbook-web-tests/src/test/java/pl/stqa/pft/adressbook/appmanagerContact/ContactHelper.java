@@ -7,8 +7,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pl.stqa.pft.adressbook.model.ContactData;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBaseC {
 
@@ -24,9 +25,13 @@ public class ContactHelper extends HelperBaseC {
   }
 
 
-  public void selectID(int index) {
 
-    wd.findElements(By.name("selected[]")).get(index).click();
+
+
+
+  public void selectContactByID(int id) {
+
+    wd.findElement(By.cssSelector("input[value= '" + id + "']")).click();
 
   }
 
@@ -81,19 +86,23 @@ public class ContactHelper extends HelperBaseC {
 
   }
 
-  public void modify(int index, ContactData contact) {
-    selectID(index);
+  public void modify(ContactData contact) {
+    selectContactByID(contact.getId());
     initContactModification();
     create(contact, true);
     submitContactModification();
   }
 
-  public void delete(int index) {
-    selectID(index);
+
+
+
+
+  public void delete(ContactData contact) {
+
+    selectContactByID(contact.getId());
     deleteSelectedContact();
 
   }
-
 
   public boolean isThereAContact() {
 
@@ -107,9 +116,9 @@ public class ContactHelper extends HelperBaseC {
 
   }
 
-  public List<ContactData> list() {
+  public Set<ContactData> all() {
 
-    List<ContactData> contacts = new ArrayList<ContactData>();
+    Set<ContactData> contacts = new HashSet<ContactData>();
 
     List<WebElement> elements = wd.findElements(By.cssSelector("span.contact"));
     for (WebElement element : elements) {
@@ -121,8 +130,6 @@ public class ContactHelper extends HelperBaseC {
     }
     return contacts;
   }
-
-
 
 
 
