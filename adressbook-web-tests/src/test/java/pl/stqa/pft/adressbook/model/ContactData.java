@@ -20,6 +20,17 @@ public class ContactData {
 
   private String address;
 
+  public String getDetails() {
+    return details;
+  }
+
+  public void setDetails(String details) {
+    this.details = details;
+  }
+
+
+
+  private String details;
 
   public ContactData withAllPhones(String allPhones) {
     this.allPhones = allPhones;

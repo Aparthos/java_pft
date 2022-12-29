@@ -142,6 +142,7 @@ public class ContactHelper extends HelperBaseC {
       String email = cells.get(4).getText();
       String allPhones = cells.get(5).getText();
       String address = cells.get(3).getText();
+      String details = cells.get(6).getText();
       contacts.add(new ContactData().withId(id).withName(name).withSurname(surname)
                       .withAllPhones(allPhones));
       ContactData contact = new ContactData().withId(id).withName(name);
@@ -162,6 +163,7 @@ public class ContactHelper extends HelperBaseC {
     String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String work = wd.findElement(By.name("work")).getAttribute("value");
     String address = wd.findElement(By.name("address")).getAttribute("value");
+    String details = wd.findElement(By.name("details")).getAttribute("value");
     wd.navigate().back();
     return new ContactData().withId(contact.getId()).withName(firstname).withSurname(lastname).withEmail(email)
             .withHomePhone(home).withMobilePhone(mobile).withWorkPhone(work).withAddress(address);
