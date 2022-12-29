@@ -12,6 +12,9 @@ public class ContactData {
   private String email;
 
   private String group;
+  private String home;
+  private String mobile;
+  private String work;
 
 
   public void setGroup(String group) {
@@ -61,6 +64,23 @@ public class ContactData {
 
   }
 
+  public ContactData withHomePhone(String home) {
+    this.home = home;
+    return this;
+
+  }
+
+  public ContactData withMobilePhone(String mobile) {
+    this.mobile = mobile;
+    return this;
+
+  }
+  public ContactData withWorkPhone(String work) {
+    this.work = work;
+    return this;
+
+  }
+
   public String getName() {
     return name;
 
@@ -84,6 +104,17 @@ public class ContactData {
 
   public String getGroup() {
     return group;
+  }
+  public String getHomePhone() {
+    return home;
+  }
+
+  public String getMobilePhone() {
+    return mobile;
+  }
+
+  public String getWorkPhone() {
+    return work;
   }
 
 
@@ -116,4 +147,6 @@ public class ContactData {
     result = 31 * result + (surname != null ? surname.hashCode() : 0);
     return result;
   }
+
+
 }
