@@ -7,11 +7,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pl.stqa.pft.adressbook.model.ContactData;
 import pl.stqa.pft.adressbook.model.Contacts;
-import pl.stqa.pft.adressbook.model.Groups;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends HelperBaseC {
 
@@ -112,7 +109,7 @@ public class ContactHelper extends HelperBaseC {
 
   }
 
-  public int getContactCount() {
+  public int count() {
 
     return wd.findElements(By.name("selected[]")).size();
 

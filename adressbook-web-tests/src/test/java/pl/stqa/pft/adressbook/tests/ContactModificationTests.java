@@ -37,6 +37,7 @@ public class ContactModificationTests extends TestBaseC{
     ContactData contact = new ContactData().withId(modifiedContact.getId()).withName("Kamil").withSurname("Malinowski").withNickname("Aparthos").withTitle("Mr.").withEmail("kamilmal7wp.pl@wp.pl");
     app.contact().modify(contact);
     app.goToC().Home();
+    assertThat(app.contact().count(), equalTo(before.size()));
     Contacts after = app.contact().all();
     assertEquals(after.size(), before.size() );
 
