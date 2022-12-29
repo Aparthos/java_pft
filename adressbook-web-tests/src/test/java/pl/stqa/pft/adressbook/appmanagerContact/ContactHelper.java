@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pl.stqa.pft.adressbook.model.ContactData;
 import pl.stqa.pft.adressbook.model.Contacts;
+import pl.stqa.pft.adressbook.model.Groups;
 
 import java.util.HashSet;
 import java.util.List;
@@ -82,6 +83,7 @@ public class ContactHelper extends HelperBaseC {
 
     chooseAddNew();
     fillContactForm(contact, b);
+    contactCache = null;
     submitContactForm();
 
 
@@ -91,17 +93,16 @@ public class ContactHelper extends HelperBaseC {
     selectContactByID(contact.getId());
     initContactModification();
     create(contact, true);
+    contactCache = null;
     submitContactModification();
   }
-
-
-
 
 
   public void delete(ContactData contact) {
 
     selectContactByID(contact.getId());
     deleteSelectedContact();
+    contactCache = null;
 
   }
 
@@ -117,9 +118,19 @@ public class ContactHelper extends HelperBaseC {
 
   }
 
+  private Contacts contactCache = null;
+
+
   public Contacts all() {
 
-    Contacts contacts = new Contacts();
+  if (contactCache != null) {
+
+    return new Contacts(contactCache);
+
+  }
+
+
+    contactCache = new Contacts();
 
     List<WebElement> elements = wd.findElements(By.cssSelector("span.contact"));
     for (WebElement element : elements) {
@@ -127,9 +138,9 @@ public class ContactHelper extends HelperBaseC {
       String surname = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("intput")).getAttribute("value"));
       ContactData contact = new ContactData().withId(id).withName(name);
-      contacts.add(contact);
+      contactCache.add(contact);
     }
-    return contacts;
+    return new Contacts(contactCache);
   }
 
 
