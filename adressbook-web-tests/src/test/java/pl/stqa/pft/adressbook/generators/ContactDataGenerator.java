@@ -3,6 +3,7 @@ package pl.stqa.pft.adressbook.generators;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.ParameterException;
+import com.thoughtworks.xstream.XStream;
 import pl.stqa.pft.adressbook.model.ContactData;
 import pl.stqa.pft.adressbook.model.GroupData;
 
@@ -23,6 +24,13 @@ public class ContactDataGenerator {
   public String file;
 
 
+  @Parameter (names = "-d", description = "Data format")
+  public String format;
+
+
+
+
+
 
 
   public static void main (String[] args) throws IOException {
@@ -40,22 +48,46 @@ public class ContactDataGenerator {
     }
     generator.run();
 
+  }
 
+  private void saveAsXml(List<ContactData> contacts, File file) throws IOException {
 
-
-
+    XStream xstream = new XStream();
+    xstream.processAnnotations(ContactData.class);
+    String xml = xstream.toXML(contacts);
+    Writer writer = new FileWriter(file);
+    writer.write(xml);
+    writer.close();
 
   }
+
+
+
+
+
 
   private void run() throws IOException {
 
     List<ContactData> contacts = generateContacts(count);
-    save(contacts, new File(file));
+    if (format.equals("csv")) {
+      saveasCsv(contacts, new File(file));
+
+      } else if (format.equals("xml")) {
+      saveAsXml(contacts, new File(file));
+
+    } else {
+      System.out.println("Unrecognized format" + format);
+
+
+    }
+
+
+
 
   }
 
 
-    private void save (List<ContactData> contacts, File file) throws IOException {
+    private void saveasCsv(List<ContactData> contacts, File file) throws IOException {
 
 
     System.out.println(new File(".").getAbsolutePath());
