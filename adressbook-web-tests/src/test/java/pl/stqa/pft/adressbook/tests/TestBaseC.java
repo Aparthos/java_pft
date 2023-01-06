@@ -1,5 +1,6 @@
 package pl.stqa.pft.adressbook.tests;
 
+
 import org.openqa.selenium.remote.Browser;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -7,7 +8,8 @@ import pl.stqa.pft.adressbook.appmanagerContact.ApplicationManagerC;
 
 public class TestBaseC{
 
-  protected static final ApplicationManagerC app = new ApplicationManagerC(Browser.FIREFOX.browserName());
+  protected static final ApplicationManagerC app
+          = new ApplicationManagerC(System.getProperty("browser"));
 
   @BeforeSuite(alwaysRun = true)
   public void setUp() throws Exception {
