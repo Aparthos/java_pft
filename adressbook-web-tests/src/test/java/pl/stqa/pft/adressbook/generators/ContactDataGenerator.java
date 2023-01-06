@@ -55,11 +55,12 @@ public class ContactDataGenerator {
     XStream xstream = new XStream();
     xstream.processAnnotations(ContactData.class);
     String xml = xstream.toXML(contacts);
-    Writer writer = new FileWriter(file);
-    writer.write(xml);
-    writer.close();
 
-  }
+      try (Writer writer = new FileWriter(file)) {
+
+        writer.write(xml);
+      }
+   }
 
 
 
@@ -90,15 +91,15 @@ public class ContactDataGenerator {
     private void saveasCsv(List<ContactData> contacts, File file) throws IOException {
 
 
-    System.out.println(new File(".").getAbsolutePath());
-    Writer writer = new FileWriter(file);
-    for (ContactData contact : contacts) {
-      writer.write(String.format("%s;%s\n", contact.getName(), contact.getSurname()));
+      System.out.println(new File(".").getAbsolutePath());
+      try (Writer writer = new FileWriter(file)) {
+        for (ContactData contact : contacts) {
+          writer.write(String.format("%s;%s\n", contact.getName(), contact.getSurname()));
+        }
+
+
+      }
     }
-  writer.close();
-
-  }
-
   private  List<ContactData> generateContacts(int count) {
     List<ContactData> contacts = new ArrayList<ContactData>();
 
