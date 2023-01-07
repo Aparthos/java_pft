@@ -6,10 +6,19 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import pl.stqa.pft.adressbook.appmanagerContact.ApplicationManagerC;
 
+import java.io.IOException;
+
 public class TestBaseC{
 
-  protected static final ApplicationManagerC app
-          = new ApplicationManagerC(System.getProperty("browser"));
+  protected static final ApplicationManagerC app;
+
+  static {
+    try {
+      app = new ApplicationManagerC(System.getProperty("browser"));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+  }
 
   @BeforeSuite(alwaysRun = true)
   public void setUp() throws Exception {
