@@ -56,7 +56,7 @@ public class ApplicationManagerC {
     contactHelper = new ContactHelper(wd);
     navigationHelperC = new NavigationHelperC(wd);
     sessionHelperC = new SessionHelperC(wd);
-    wd.get(properties.getProperty("web.baseURL)"));
+    wd.get(properties.getProperty("web.baseURL"));
     sessionHelperC.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
       }
 

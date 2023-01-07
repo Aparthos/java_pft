@@ -52,7 +52,7 @@ public class ApplicationManager {
     groupHelper = new GroupHelper((FirefoxDriver) wd);
     navigationHelper = new NavigationHelper (wd);
     sessionHelper = new SessionHelper(wd);
-    wd.get(properties.getProperty("web.baseURL)"));
+    wd.get(properties.getProperty("web.baseURL"));
     sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
 
   }
