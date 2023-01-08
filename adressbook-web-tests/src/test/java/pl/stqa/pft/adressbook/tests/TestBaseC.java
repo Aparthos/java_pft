@@ -1,14 +1,22 @@
 package pl.stqa.pft.adressbook.tests;
 
 
+import org.hamcrest.CoreMatchers;
 import org.openqa.selenium.remote.Browser;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import pl.stqa.pft.adressbook.appmanagerContact.ApplicationManagerC;
+import pl.stqa.pft.adressbook.model.ContactData;
+import pl.stqa.pft.adressbook.model.Contacts;
+import pl.stqa.pft.adressbook.model.GroupData;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
-public class TestBaseC{
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+public class TestBaseC {
 
   protected static final ApplicationManagerC app;
 
@@ -34,5 +42,18 @@ public class TestBaseC{
 
   public ApplicationManagerC getApp() {
     return app;
+  }
+
+
+  public void verifyContactListInUI() {
+
+    if (Boolean.getBoolean("verifyUI")) {
+      Contacts dbContacts = app.db().contacts();
+      Contacts uiContacts = app.contact().all();
+      assertThat(uiContacts, equalTo(dbContacts.stream()
+              .map((g) -> new ContactData().withId(g.getId()).withName(g.getName()).withSurname(g.getSurname())).collect(Collectors.toSet())));
+    }
+
+
   }
 }

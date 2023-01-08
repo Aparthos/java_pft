@@ -5,6 +5,7 @@ import org.testng.annotations.*;
 import pl.stqa.pft.adressbook.model.ContactData;
 import pl.stqa.pft.adressbook.model.Contacts;
 import pl.stqa.pft.adressbook.model.GroupData;
+import pl.stqa.pft.adressbook.model.Groups;
 
 
 import java.io.*;
@@ -60,21 +61,28 @@ public class ContactCreationTests extends TestBaseC {
   @Test(dataProvider = "validContacts")
   public void testContactCreation(ContactData contact) throws Exception {
 
+    Groups groups = app.db().groups();
+    File photo = new File("src/test/resources/images.jfif");
+    ContactData newContact = new ContactData().withName("Kamil").withSurname("Malinowski").withPhoto(photo)
+            .inGroup(groups.iterator().next());
 
     app.goToC().Home();
     Contacts before = app.db().contacts();
 
 
-    File photo = new File("src/test/resources/images.jfif");
-    app.contact().create(new ContactData().withName("Kamil").withSurname("Malinowski").withPhoto(photo), false);
+
+    app.contact().create(, true);
     app.goToC().Home();
     Contacts after = app.db().contacts();
     assertThat(after.size(), equalTo(before.size() + 1));
     assertThat(after, equalTo(before.withAdded(
             contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
 
+    verifyContactListInUI();
 
   }
+
+
 }
 
 
