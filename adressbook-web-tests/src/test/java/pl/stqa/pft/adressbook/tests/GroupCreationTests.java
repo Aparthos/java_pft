@@ -24,6 +24,20 @@ public class GroupCreationTests extends TestBase {
   @DataProvider
   public Iterator <Object[]> validGroups() throws IOException {
 
+
+    if (app.db().groups().size() == 0) {
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withName("test1"));
+
+
+
+    }
+
+
+
+
+
+
     List<Object[]> list = new ArrayList<Object[]>();
     try (BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")))) {
       String xml = "";
@@ -54,9 +68,9 @@ public class GroupCreationTests extends TestBase {
 
 
       app.goTo().groupPage();
-      Groups before = app.group().all();
+      Groups before = app.db().groups();
       app.group().create(group);
-      Groups after = app.group().all();
+      Groups after = app.db().groups();
       assertThat(app.group().count(), equalTo(before.size() + 1));
       assertThat(after, equalTo(
               before.withAdded(group.withtId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));

@@ -7,10 +7,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.Browser;
+import pl.stqa.pft.adressbook.appmanagerGroup.DbHelper;
 
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -26,6 +26,8 @@ public class ApplicationManagerC {
   private ContactHelper contactHelper;
 
   private String browser;
+  private DbHelper dbHelper;
+
 
   public ApplicationManagerC(String browser) throws IOException {
 
@@ -40,9 +42,17 @@ public class ApplicationManagerC {
 
   public void init() throws IOException {
 
+
+
+
+
     String target = System.getProperty("target", "local");
 
     properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
+
+
+    dbHelper = new DbHelper();
+
 
     if (browser.equals(Browser.FIREFOX.browserName())) {
       wd = new FirefoxDriver();
@@ -58,7 +68,13 @@ public class ApplicationManagerC {
     sessionHelperC = new SessionHelperC(wd);
     wd.get(properties.getProperty("web.baseURL"));
     sessionHelperC.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
-      }
+
+
+
+
+
+
+  }
 
 
 
@@ -84,4 +100,10 @@ public class ApplicationManagerC {
   public NavigationHelperC goToC() {
     return navigationHelperC;
   }
+
+
+  public DbHelper db() {
+    return dbHelper;
+  }
+
 }
