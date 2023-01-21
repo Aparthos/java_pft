@@ -24,6 +24,7 @@ public class ApplicationManager {
   private RegistrationHelper registrationHelper;
   private FtpHelper ftp;
   private MailHelper mailHelper;
+  private SoapHelper soapHelper;
 
 
   public ApplicationManager(String browser) throws IOException {
@@ -127,6 +128,18 @@ public MailHelper mail() {
 
 
 }
+
+public SoapHelper soap() {
+
+  if (soapHelper == null) {
+
+    soapHelper = new SoapHelper(this);
+
+  }
+  return soapHelper;
+}
+
+
 
 }
 

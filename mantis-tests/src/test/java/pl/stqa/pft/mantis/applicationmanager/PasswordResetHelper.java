@@ -14,13 +14,13 @@ package com.example.tests;
 
 import java.util.regex.Pattern;
 import java.util.concurrent.TimeUnit;
-import org.testng.annotations.*;
-import static org.testng.Assert.*;
-import org.openqa.selenium.*;
+import org.testng.annotations .*;
+import static org.testng.Assert .*;
+import org.openqa.selenium .*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
-  public class ResetPassword  extends TestBase {
+  public class ResetPassword extends TestBase {
     private WebDriver wd;
     private String baseUrl;
     private boolean acceptNextAlert = true;
@@ -49,13 +49,11 @@ import org.openqa.selenium.support.ui.Select;
     }
 
 
-
     private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
       mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
       VerbalExpression regex = VerbalExpression.regex().find("http://").nonSpace().oneOrMore().build();
       regex.getText(mailMessage.text);
     }
-
 
 
     @AfterMethod(alwaysRun = true)
@@ -65,6 +63,5 @@ import org.openqa.selenium.support.ui.Select;
     }
 
 
-
-
+  }
 }

@@ -27,6 +27,12 @@ public class TestBase {
   public void setUp() throws Exception {
     app.init();
     app.ftp().upload(new File("src/test/resources/config_inc.php"), "config.inc.php", "config.inc.php.bak");
+    public void skipIfNotFixed(int issueId) {
+      if (isIssueOpen(issueId)) {
+        throw new SkipException("Ignored because of issue " + issueId);
+      }
+    }
+
   }
 
   @AfterSuite(alwaysRun = true)
