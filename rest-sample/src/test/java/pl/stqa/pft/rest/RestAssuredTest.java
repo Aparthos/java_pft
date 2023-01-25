@@ -47,7 +47,7 @@ public void init() {
     return new Gson().fromJson(issues, new TypeToken<Set<Issue>>()().getType());
 }
 
-private Executor getExecutor() {return Executor.newInstance().auth("LSGjeU4yP1X493ud1hNniA==", "");}
+
 
 private int createIssue(Issue newIssue) {
 
