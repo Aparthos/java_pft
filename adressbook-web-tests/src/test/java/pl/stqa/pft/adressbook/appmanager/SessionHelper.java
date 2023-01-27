@@ -1,14 +1,12 @@
-package pl.stqa.pft.adressbook.appmanagerContact;
+package pl.stqa.pft.adressbook.appmanager;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class SessionHelperC extends HelperBaseC{
-  private WebDriver wd;
+public class SessionHelper extends HelperBase {
 
-  public SessionHelperC(WebDriver wd) {
-
-    super(wd);
+  public SessionHelper(FirefoxDriver wd) {
+    super (wd);
   }
 
   public void login(String username, String password) {
@@ -16,10 +14,4 @@ public class SessionHelperC extends HelperBaseC{
     type(By.name("pass"), password);
     click(By.xpath("//input[@value='Login']"));
   }
-
-
-
-
 }
-
-

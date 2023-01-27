@@ -1,4 +1,4 @@
-package pl.stqa.pft.adressbook.appmanagerGroup;
+package pl.stqa.pft.adressbook.appmanager;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
