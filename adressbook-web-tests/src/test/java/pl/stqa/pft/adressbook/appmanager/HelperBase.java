@@ -1,17 +1,21 @@
 package pl.stqa.pft.adressbook.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class HelperBase {
 
-  protected FirefoxDriver wd;
+  protected WebDriver wd;
 
-  public HelperBase(FirefoxDriver wd) {
-    this.wd=wd;
+  public HelperBase(WebDriver wd) {
+    this.wd = wd;
   }
+
+
 
   protected void click(By locator) {
     wd.findElement(locator).click();
@@ -19,8 +23,22 @@ public class HelperBase {
 
   protected void type(By locator, String text) {
     click(locator);
-    wd.findElement(locator).clear();
-    wd.findElement(locator).sendKeys(text);
+
+    if (text != null) {
+      String existingText = wd.findElement(locator).getAttribute("value");
+      if (!text.equals(existingText)) {
+        wd.findElement(locator).clear();
+        wd.findElement(locator).sendKeys(text);
+
+
+      }
+    }
+  }
+
+  public void acceptAlert() {
+
+    wd.switchTo().alert().accept();
+
   }
 
   private boolean isAlertPresent() {
@@ -32,12 +50,18 @@ public class HelperBase {
     }
   }
 
-  private boolean isElementPresent(By by) {
+  boolean isElementPresent(By locator) {
     try {
-      wd.findElement(by);
+      wd.findElement(locator);
       return true;
     } catch (NoSuchElementException e) {
       return false;
     }
+  }
+
+  public void waitForDynamicElement(By locator) {
+
+    WebElement myDynamicElement = (new WebDriverWait(wd, Duration.ofSeconds(3)))
+            .until(ExpectedConditions.presenceOfElementLocated(locator));
   }
 }
