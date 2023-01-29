@@ -29,5 +29,26 @@ public class ContactCreationTest extends TestBase {
 
 
     }
-  }
+
+@Test
+
+public void testBadContactCreation() {
+
+  Contacts before = app.contact().all();
+  app.goTo().newContactForm();
+  ContactData contact = new ContactData().withFirstName("Kamil").withLastName("Malinowski");
+  app.contact().create(contact);
+  app.goTo().homePage();
+  assertThat(app.contact().count(), equalTo(before.size()));
+  Contacts after = app.contact().all();
+  assertThat(after, equalTo(before));
+
+
+}
+
+
+
+
+}
+
 
