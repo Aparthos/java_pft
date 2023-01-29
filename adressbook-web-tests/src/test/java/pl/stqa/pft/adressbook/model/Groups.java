@@ -19,12 +19,8 @@ public class Groups extends ForwardingSet<GroupData> {
   }
 
   public Groups() {
-    this.delegate = new HashSet<>();
-  }
 
-  public Groups(Collection<GroupData> groups) {
-
-    this.delegate = new HashSet<GroupData>(groups);
+    this.delegate = new HashSet<GroupData>();
   }
 
 

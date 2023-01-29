@@ -39,7 +39,7 @@ public class DbHelper {
     }
     session.getTransaction().commit();
     session.close();
-    return new Groups(result);
+    return new Groups();
 
   }
 

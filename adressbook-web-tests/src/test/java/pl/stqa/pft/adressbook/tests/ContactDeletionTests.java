@@ -2,30 +2,43 @@ package pl.stqa.pft.adressbook.tests;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pl.stqa.pft.adressbook.model.ContactData;
+import pl.stqa.pft.adressbook.model.Contacts;
 
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.testng.AssertJUnit.assertEquals;
+
 public class ContactDeletionTests extends TestBase {
+
+  @BeforeMethod
+  public void ensurePreconditions() {
+    if (app.contact().all().size() == 0) {
+      app.goTo().newContactForm();
+      app.contact().create(new ContactData().withFirstName("Kamil").withLastName("Malinowski"));
+      app.goTo().homePage();
+    }
+  }
+
 
   @Test
   public void testContactDeletion() {
-    if (!app.getContactHelper().isThereAContact()) {
-      app.getNavigationHelper().goToAddNewContactForm();
-      app.getContactHelper().createContact(new ContactData("Kamil", "Malinowski"));
-      app.getNavigationHelper().goToHomePage();
-    }
 
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().selectContact(before.size() - 1);
-    app.getContactHelper().deleteSelectedContacts();
-    app.getContactHelper().waitForDynamicElement(By.cssSelector("div.msgbox"));
-    app.getNavigationHelper().goToHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
-    Assert.assertEquals(after.size(), before.size() - 1);
+    Contacts before = app.contact().all();
+    ContactData deletedContact = before.iterator().next();
+    app.contact().delete(deletedContact);
+    app.goTo().homePage();
+    Contacts after = app.contact().all();
+    assertEquals(after.size(), before.size()-1);
+    before.remove(deletedContact);
+    assertThat(after, equalTo(before.without(deletedContact)));
 
-    before.remove(before.size() - 1);
-    Assert.assertEquals(before, after);
+
+
+
   }
 }

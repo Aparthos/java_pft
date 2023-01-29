@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import pl.stqa.pft.adressbook.model.ContactData;
+import pl.stqa.pft.adressbook.model.Contacts;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +34,8 @@ public class ContactHelper extends HelperBase {
     click(By.name("submit"));
   }
 
-  public void selectContact(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
 
   }
 
@@ -44,15 +45,17 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public void initContactModification(int index) {
-    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+  public void initContactModification() {
+
+    wd.findElement(By.xpath("//img[@alt='Edit']")).click();
   }
 
   public void submitContactModification() {
+
     click(By.name("update"));
   }
 
-  public void createContact(ContactData contact) {
+  public void create(ContactData contact) {
 
     fillNewContactForm(contact, true);
 
@@ -61,22 +64,37 @@ public class ContactHelper extends HelperBase {
 
   }
 
+  public void modify(ContactData contact) {
+    selectContactById(contact.getId());
+    initContactModification();
+    fillNewContactForm(contact, false);
+    submitContactModification();
+  }
+
+
+  public void delete(ContactData contact) {
+
+    selectContactById(contact.getId());
+    deleteSelectedContacts();
+    waitForDynamicElement(By.cssSelector("div.msgbox"));
+  }
+
+
   public boolean isThereAContact() {
 
     return isElementPresent(By.name("selected[]"));
 
   }
 
-  public List<ContactData> getContactList() {
+  public Contacts all() {
 
-    List<ContactData> contacts = new ArrayList<ContactData>();
+    Contacts contacts = new Contacts(all());
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
     for (WebElement element : elements) {
       String firstName = element.findElement(By.xpath("td[3]")).getText();
       String lastName = element.findElement(By.xpath("td[2]")).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-      ContactData contact = new ContactData(id, firstName, lastName);
-      contacts.add(contact);
+      contacts.add(new ContactData().withId(id).withFirstName(firstName).withLastName(lastName));
 
     }
 
