@@ -1,7 +1,5 @@
 package pl.stqa.pft.adressbook.model;
 
-import java.util.Objects;
-
 public class ContactData {
 
   private int id = Integer.MAX_VALUE;
@@ -17,23 +15,9 @@ public class ContactData {
   private String email3;
   private String allEmails;
   private String address;
+  private String contactDetails;
 
 
-
-
-
-  @Override
-  public boolean equals(final Object o) {
-    if (this == o) return true;
-    if (o == null || this.getClass() != o.getClass()) return false;
-    final ContactData that = (ContactData) o;
-    return this.id == that.id && Objects.equals(this.firstName, that.firstName) && Objects.equals(this.lastName, that.lastName);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(this.id, this.firstName, this.lastName);
-  }
 
   public int getId() {
     return this.id;
@@ -154,9 +138,14 @@ public class ContactData {
     return this;
   }
 
+  public String getContactDetails() {
+    return contactDetails;
+  }
 
-
-
+  public ContactData withContactDetails(String contactDetails) {
+    this.contactDetails = contactDetails;
+    return this;
+  }
 
 
   @Override

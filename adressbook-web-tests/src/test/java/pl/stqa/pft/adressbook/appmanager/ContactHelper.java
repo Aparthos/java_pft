@@ -98,7 +98,7 @@ public class ContactHelper extends HelperBase {
   public Contacts all() {
 
     if (contactCache != null) {
-      return new Contacts ();
+      return new Contacts();
     }
     contactCache = new Contacts();
     List<WebElement> rows = wd.findElements(By.xpath("//tr[@name='entry']"));
@@ -115,7 +115,7 @@ public class ContactHelper extends HelperBase {
 
     }
 
-    return new Contacts();
+    return new Contacts(contactCache);
 
   }
 
@@ -136,12 +136,23 @@ public class ContactHelper extends HelperBase {
             .withMobilePhone(mobile).withWorkPhone(work).withEmail(email)
             .withEmail2(email2).withEmail3(email3).withAddress(address);
   }
-  private void initContactModificationById(int id){
+
+  private void initContactModificationById(int id) {
     WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
     WebElement row = checkbox.findElement(By.xpath("./../.."));
     List<WebElement> cells = row.findElements(By.tagName("td"));
     cells.get(7).findElement(By.tagName("a")).click();
   }
 
+  public ContactData infoFromDetailsView(ContactData contact) {
+    initContactDetails(contact.getId());
+    String contactDetails = wd.findElement(By.xpath("//div[@id='content']")).getText();
+    return new ContactData().withId(contact.getId()).withContactDetails(contactDetails);
+  }
 
+  private void initContactDetails(int id) {
+
+    wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click();
+
+  }
 }

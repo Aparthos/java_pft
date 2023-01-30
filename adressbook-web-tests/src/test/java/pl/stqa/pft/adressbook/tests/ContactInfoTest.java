@@ -8,48 +8,51 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
+import static pl.stqa.pft.adressbook.tests.TestBase.app;
 
-public class ContactOverviewTest extends TestBase {
+public class ContactInfoTest {
 
   @Test
-
-  public void testContactDetails() {
+  public void testContactAddresses() {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-    assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
-
-    assertThat(contact.getAllEmails().trim().replaceAll(" +", ""), equalTo(mergeEmails(contactInfoFromEditForm)));
 
     assertThat(contact.getAddress().trim()
                     .replaceAll(" +", ""),
             equalTo(contactInfoFromEditForm.getAddress().trim().replaceAll(" +", "")));
 
+    assertThat(contact.getAllEmails().trim()
+            .replaceAll(" +", ""), equalTo(mergeEmails(contactInfoFromEditForm)));
+
+    assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFromEditForm)));
+
   }
 
-  private String mergePhones(ContactData contact) {
 
+  private String mergePhones(ContactData contact) {
     return Arrays.asList(contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone())
-            .stream().filter((s -> !s.equals("")))
-            .map(ContactOverviewTest::cleaned)
-            .collect(Collectors.joining("\n"));
+              .stream().filter((s -> ! s.equals("")))
+              .map(ContactInfoTest :: cleaned)
+              .collect(Collectors.joining("\n"));
 
   }
 
 
   private String mergeEmails(ContactData contact) {
     return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
-            .stream().filter((s -> !s.equals("")))
-            .map(ContactOverviewTest::cleanedE)
+            .stream().filter((s -> ! s.equals("")))
+            .map(ContactInfoTest :: cleanedE)
             .collect(Collectors.joining("\n"));
   }
 
-  private static String cleanedE(String phone) {
+  private static String cleaned(String phone) {
 
     return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
   }
 
-  private static String cleaned(String email) {
+  private static String cleanedE(String email) {
     return email.replaceAll("\\s", "");
   }
 }
+
