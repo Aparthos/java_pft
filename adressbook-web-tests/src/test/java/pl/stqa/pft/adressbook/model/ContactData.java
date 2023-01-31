@@ -1,5 +1,11 @@
 package pl.stqa.pft.adressbook.model;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "addressbook")
 public class ContactData {
 
   private int id = Integer.MAX_VALUE;

@@ -9,15 +9,22 @@ import pl.stqa.pft.adressbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-  protected static final ApplicationManager app = new ApplicationManager(Browser.FIREFOX);
+  protected static final ApplicationManager app =
+          new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
-  @BeforeSuite(alwaysRun = true)
+
+  @BeforeSuite
   public void setUp() throws Exception {
     app.init();
   }
 
-  @AfterSuite(alwaysRun = true)
-  public void tearDown() throws Exception {
+  @AfterSuite
+  public void tearDown() {
     app.stop();
   }
+
+  private static class BrowserType {
+    public static String CHROME;
+  }
 }
+

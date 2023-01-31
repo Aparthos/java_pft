@@ -18,7 +18,7 @@ public class ContactDetailsTest extends TestBase {
     app.goTo().homePage();
     ContactData contact = app.contact().all().iterator().next();
     ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-    ContactData contactInfoFromDetailsView = app.contact().infoFromDetailsView(contact);
+    ContactData contactInfoFromDetailsView = app.contact().infoFromViewForm(contact);
     assertThat(contactInfoFromDetailsView.getContactDetails()
                     .trim().replaceAll(" +", "").replaceAll("\\s", "")
                     .replaceAll("[HW:]", ""),

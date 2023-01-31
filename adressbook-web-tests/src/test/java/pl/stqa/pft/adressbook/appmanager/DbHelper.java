@@ -15,52 +15,31 @@ import java.util.List;
 public class DbHelper {
 
 
-  private SessionFactory sessionFactory;
+  private final SessionFactory sessionFactory;
 
-  protected void setUp() throws Exception {
-    // A SessionFactory is set up once for an application!
-    final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-            .configure() // configures settings from hibernate.cfg.xml
-            .build();
-
-    sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-
-    }
-
+  public DbHelper() {
+    final StandardServiceRegistry regidtry = new StandardServiceRegistryBuilder().configure().build();
+    sessionFactory = new MetadataSources(regidtry).buildMetadata().buildSessionFactory();
+  }
 
   public Groups groups() {
-
-
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    List<GroupData> result = session.createQuery( "from GroupData where deprecated = '0000-00-00' ").list();
-    for ( GroupData group : (List<GroupData>) result ) {
-      System.out.println(group);
-    }
+    List<GroupData> result = session.createQuery("from GroupData").list();
     session.getTransaction().commit();
     session.close();
-    return new Groups();
-
+    return new Groups(result);
   }
 
   public Contacts contacts() {
-
     Session session = sessionFactory.openSession();
     session.beginTransaction();
-    List<ContactData> result = session.createQuery( "from ContactData where deprecated = '0000-00-00' ").list();
-    for ( ContactData contact : (List<ContactData>) result ) {
-      System.out.println(contact);
-    }
+    List<ContactData> result = session.createQuery("from ContactData where deprecated = '0000-00-00'").list();
     session.getTransaction().commit();
     session.close();
     return new Contacts(result);
-
   }
-
-
-
-
-  }
+}
 
 
 
