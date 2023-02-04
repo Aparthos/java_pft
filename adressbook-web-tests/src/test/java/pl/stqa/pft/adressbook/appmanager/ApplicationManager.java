@@ -7,11 +7,14 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.Browser;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
@@ -38,15 +41,25 @@ public class ApplicationManager {
 
     dbHelper = new DbHelper();
 
-    if (browser.equals(Browser.FIREFOX)){
-      wd = new FirefoxDriver();
-    }   else if (browser.equals(Browser.CHROME)){
-      wd = new ChromeDriver();
-    }   else if (browser.equals(Browser.IE)){
-      wd = new InternetExplorerDriver();
-    }   else if (browser.equals(Browser.EDGE))
-      wd = new EdgeDriver();
+    if ("".equals(properties.getProperty("selenium.server"))) {
+      if (browser.equals(Browser.FIREFOX)) {
+        wd = new FirefoxDriver();
+      } else if (browser.equals(Browser.CHROME)) {
+        wd = new ChromeDriver();
+      } else if (browser.equals(Browser.IE)) {
+        wd = new InternetExplorerDriver();
+      } else if (browser.equals(Browser.EDGE)) {
+        wd = new EdgeDriver();
+      }
 
+    } else {
+
+
+      DesiredCapabilities capabilities = new DesiredCapabilities();
+      capabilities.setBrowserName(browser);
+      wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
+
+    }
     wd.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
     wd.get(properties.getProperty("web.baseUrl"));
     groupHelper = new GroupHelper(wd);
@@ -54,6 +67,7 @@ public class ApplicationManager {
     sessionHelper = new SessionHelper(wd);
     contactHelper = new ContactHelper(wd);
     sessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
+
   }
 
   public void stop() {

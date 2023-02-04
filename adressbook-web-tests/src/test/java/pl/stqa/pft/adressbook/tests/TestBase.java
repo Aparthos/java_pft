@@ -1,6 +1,6 @@
 package pl.stqa.pft.adressbook.tests;
 
-import org.openqa.selenium.remote.Browser;
+
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
